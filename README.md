@@ -1,4 +1,4 @@
-# cart
+# Cart
 
 ## Build Setup
 
@@ -15,6 +15,21 @@ $ yarn start
 
 # generate static project
 $ yarn generate
+```
+
+## ENV Setup
+
+```dotenv
+# create .env
+cp .env.example .env
+
+PROJECT_NAME=Название проекта
+SERVER_PORT=Порт сервера
+BASE_URL=API URL
+
+PROXY_API_TARGET=PROXY URL
+PROXY_API_AUTH=PROXY AUTH
+
 ```
 
 For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).

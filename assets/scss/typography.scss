@@ -1,0 +1,29 @@
+@mixin typography-base {
+  font-family: "Open Sans", sans-serif;
+  font-weight: normal;
+  font-style: normal;
+}
+
+@mixin typography-headline {
+  @include typography-base;
+  letter-spacing: .1em;
+  font-size: 22px;
+  line-height: 30px;
+  font-weight: 600;
+  text-transform: uppercase;
+
+  @include tablet {
+    font-size: 20px;
+  }
+}
+
+@mixin typography-p {
+  @include typography-base;
+  font-size: 16px;
+  line-height: 24px;
+
+  @include tablet {
+    font-size: 14px;
+    line-height: 22px;
+  }
+}

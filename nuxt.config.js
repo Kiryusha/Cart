@@ -1,19 +1,20 @@
+import eslintFriendlyFormatter from 'eslint-friendly-formatter'
+import fs from 'fs'
+
+const envName = fs.existsSync('.env') ? '.env' : '.env.example'
+
+// eslint-disable-next-line import/no-extraneous-dependencies
+require('dotenv').config({
+  path: envName
+})
 
 export default {
-  /*
-  ** Nuxt rendering mode
-  ** See https://nuxtjs.org/api/configuration-mode
-  */
   mode: 'universal',
-  /*
-  ** Nuxt target
-  ** See https://nuxtjs.org/api/configuration-target
-  */
-  target: 'server',
-  /*
-  ** Headers of the page
-  ** See https://nuxtjs.org/api/configuration-head
-  */
+
+  server: {
+    port: process.env.SERVER_PORT,
+  },
+
   head: {
     title: process.env.npm_package_name || '',
     meta: [
@@ -25,16 +26,19 @@ export default {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
   },
+  loading: { color: '#404244' },
   /*
   ** Global CSS
   */
   css: [
+    '@/assets/scss/global.scss',
   ],
   /*
   ** Plugins to load before mounting the App
   ** https://nuxtjs.org/guide/plugins
   */
   plugins: [
+    '@/plugins/generalComponents',
   ],
   /*
   ** Auto import components
@@ -54,18 +58,70 @@ export default {
   ** Nuxt.js modules
   */
   modules: [
-    // Doc: https://axios.nuxtjs.org/usage
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    '@nuxtjs/dotenv',
+    '@nuxtjs/style-resources',
+    ['@nuxtjs/component-cache', {
+      max: 10000,
+      maxAge: 1000 * 60 * 60,
+    }],
   ],
   /*
-  ** Axios module configuration
+   ** Styles for each component
+   **
+   ** Эти стили будут добавляться в каждый компонент
+  */
+  styleResources: {
+    scss: [
+      '@/assets/scss/variables.scss',
+      '@/assets/scss/mixins.scss',
+      '@/assets/scss/typography.scss',
+    ],
+  },
+  // шрифты
+  webfontloader: {
+    google: {
+      families: ['Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600'],
+    },
+  },
+  /*
+  **  Конфигурация Dotenv
+  */
+  dotenv: {},
+  /*
+  ** Ax  ios module configuration
   ** See https://axios.nuxtjs.org/options
   */
-  axios: {},
+  axios: {
+    baseURL: process.env.baseURL,
+    // proxy: true,
+  },
+  /*
+  ** as proxy configuration
+  */
+  // proxy: {
+  //   '/api': {
+  //     target: process.env.PROXY_API_TARGET,
+  //     auth: process.env.PROXY_API_AUTH,
+  //   },
+  // },
   /*
   ** Build configuration
   ** See https://nuxtjs.org/api/configuration-build/
   */
   build: {
+    extend(config, { isDev, isClient }) {
+      if (isDev && isClient) {
+        config.module.rules.push({
+          enforce: 'pre',
+          test: /\.(js|vue)$/,
+          loader: 'eslint-loader',
+          exclude: /(node_modules)/,
+          options: {
+            formatter: eslintFriendlyFormatter,
+          },
+        });
+      }
+    },
   }
 }
