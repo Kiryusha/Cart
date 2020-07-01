@@ -84,11 +84,11 @@ export default {
 
   methods: {
     addToCart () {
-      this.$store.commit('cart/addItem', this.info.id)
+      this.$store.dispatch('cart/addItem', this.info.id)
     },
 
     removeFromCart () {
-      this.$store.commit('cart/removeItem', this.info.id)
+      this.$store.dispatch('cart/removeItem', this.info.id)
     },
 
     setState (state) {
@@ -123,8 +123,7 @@ section {
   padding: 12px;
   border: 2px solid $gray;
 
-  ::v-deep .app-button + .app-button,
-  ::v-deep .app-input + .app-input {
+  ::v-deep .app-button + .app-button {
     margin-top: 8px;
   }
 }

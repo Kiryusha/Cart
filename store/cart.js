@@ -2,7 +2,7 @@
 export const state = () => ({
   list: ['1', '2', '3', '4', '5', '6', '7'],
   sorting: 'date',
-  currentPage: 0,
+  currentPage: 1,
   pageSize: 2
 })
 
@@ -17,6 +17,22 @@ export const mutations = {
 
   setSorting (state, sorting) {
     state.sorting = sorting
+  },
+
+  setCurrentPage (state, page) {
+    state.currentPage = page
+  }
+}
+
+export const actions = {
+  addItem ({ commit }, id) {
+    commit('addItem', id)
+    commit('setCurrentPage', 1)
+  },
+
+  removeItem ({ commit }, id) {
+    commit('removeItem', id)
+    commit('setCurrentPage', 1)
   }
 }
 

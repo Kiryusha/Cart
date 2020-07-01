@@ -21,10 +21,19 @@
     </div>
     <div class="container">
       <template v-if="list.length">
-        <AppItem
-          v-for="(item, index) in list"
-          :key="index"
-          v-bind="item"
+        <template v-for="(item, index) in list">
+          <AppItem
+            v-if="shouldShowItem(index)"
+            :key="index"
+            v-bind="item"
+          />
+        </template>
+        <AppPagination
+          :current-page="currentPage"
+          :page-size="pageSize"
+          :total="list.length"
+          @prev="handlePrev"
+          @next="handleNext"
         />
       </template>
       <template v-else>
@@ -50,12 +59,38 @@ export default {
 
     list () {
       return this.$store.getters['cart/processedList']
+    },
+
+    pageSize () {
+      return this.$store.state.cart.pageSize
+    },
+
+    currentPage: {
+      get () {
+        return this.$store.state.cart.currentPage
+      },
+      set (value) {
+        this.$store.commit('cart/setCurrentPage', value)
+      }
     }
   },
 
   methods: {
     setSorting (type) {
       this.sorting = type
+    },
+
+    shouldShowItem (index) {
+      return index < (this.pageSize * this.currentPage) &&
+        index >= (this.pageSize * (this.currentPage - 1))
+    },
+
+    handlePrev () {
+      this.currentPage -= 1
+    },
+
+    handleNext () {
+      this.currentPage += 1
     }
   }
 }
@@ -81,10 +116,10 @@ export default {
 }
 
 .container {
-  padding: 4px;
+  padding: 8px 8px 0;
 }
 
 .app-item + .app-item {
-  margin-top: 4px;
+  margin-top: 8px;
 }
 </style>
