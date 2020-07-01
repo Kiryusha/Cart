@@ -20,11 +20,16 @@
       </div>
     </div>
     <div class="container">
-      <AppItem
-        v-for="(item, index) in list"
-        :key="index"
-        v-bind="item"
-      />
+      <template v-if="list.length">
+        <AppItem
+          v-for="(item, index) in list"
+          :key="index"
+          v-bind="item"
+        />
+      </template>
+      <template v-else>
+        К сожалению, покупок не найдено.
+      </template>
     </div>
   </div>
 </template>

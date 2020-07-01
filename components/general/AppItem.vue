@@ -1,5 +1,8 @@
 <template functional>
-  <div class="item">
+  <nuxt-link
+    class="item"
+    :to="`/goods/${props.id}`"
+  >
     <p>
       Наименование: {{ props.name }}
     </p>
@@ -9,7 +12,7 @@
     <p>
       Дата покупки: {{ $options.formatDate(props.date) }}
     </p>
-  </div>
+  </nuxt-link>
 </template>
 
 <script>
@@ -18,8 +21,8 @@ export default {
 
   props: {
     id: {
-      type: Number,
-      default: 0
+      type: String,
+      default: ''
     },
 
     name: {
@@ -46,6 +49,8 @@ export default {
 
 <style lang="scss" scoped>
 .item {
+  @include a-reset;
+  display: block;
   padding: 12px;
   border: 2px solid $gray;
 }
