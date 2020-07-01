@@ -1,13 +1,20 @@
 <template>
-  <div class="container">
-    <h1>
-      Cart
+  <div class="content">
+    <h1 class="title">
+      Список покупок
     </h1>
+    <List />
   </div>
 </template>
 
 <script>
+import List from '@/components/index/List'
+
 export default {
+  components: {
+    List
+  },
+
   fetch ({ store }) {
     return store.dispatch('goods/fetchData')
   }
@@ -15,4 +22,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.title {
+  margin-bottom: 12px;
+}
 </style>
