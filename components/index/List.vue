@@ -1,4 +1,4 @@
-<template lang="html">
+<template>
   <div class="list">
     <div class="controls">
       <div class="sorting">
@@ -20,7 +20,11 @@
       </div>
     </div>
     <div class="container">
-      Container
+      <AppItem
+        v-for="(item, index) in list"
+        :key="index"
+        v-bind="item"
+      />
     </div>
   </div>
 </template>
@@ -37,6 +41,10 @@ export default {
       set (value) {
         this.$store.commit('cart/setSorting', value)
       }
+    },
+
+    list () {
+      return this.$store.getters['cart/processedList']
     }
   },
 
@@ -65,5 +73,13 @@ export default {
     color: $red;
     cursor: default;
   }
+}
+
+.container {
+  padding: 4px;
+}
+
+.item + .item {
+  margin-top: 4px;
 }
 </style>
