@@ -12,7 +12,7 @@ export default {
   mode: 'universal',
 
   server: {
-    port: process.env.SERVER_PORT
+    port: process.env.PORT || process.env.SERVER_PORT
   },
 
   head: {
