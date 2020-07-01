@@ -103,21 +103,8 @@ export default {
   */
   axios: {
     baseURL: process.env.BASE_URL
-    // proxy: true,
   },
-  /*
-  ** as proxy configuration
-  */
-  // proxy: {
-  //   '/api': {
-  //     target: process.env.PROXY_API_TARGET,
-  //     auth: process.env.PROXY_API_AUTH,
-  //   },
-  // },
-  /*
-  ** Build configuration
-  ** See https://nuxtjs.org/api/configuration-build/
-  */
+
   build: {
     extend(config, { isDev, isClient }) {
       if (isDev && isClient) {

@@ -25,17 +25,17 @@ export default {
   props: {
     currentPage: {
       type: Number,
-      defaul: 0
+      default: 0
     },
 
     pageSize: {
       type: Number,
-      defaul: 0
+      default: 0
     },
 
     total: {
       type: Number,
-      defaul: 0
+      default: 0
     }
   },
 
