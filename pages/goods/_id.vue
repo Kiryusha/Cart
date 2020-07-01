@@ -14,7 +14,16 @@
       </h1>
     </section>
     <section class="info">
-      <AppItem v-bind="info" />
+      <AppItem
+        v-if="state === 'read'"
+        v-bind="info"
+      />
+      <DetailForm
+        v-else
+        :info="info"
+        @cancel="cancelEdit"
+        @submit="confirmEdit"
+      />
     </section>
     <section class="controls">
       <AppButton
@@ -29,18 +38,37 @@
       >
         Добавить к покупкам
       </AppButton>
+      <AppButton
+        v-if="state === 'read'"
+        @click="setState('edit')"
+      >
+        Редактировать
+      </AppButton>
     </section>
   </div>
 </template>
 
 <script>
+import DetailForm from '@/components/goods/DetailForm'
+
 export default {
+  components: {
+    DetailForm
+  },
+
   async fetch ({ store, redirect, params: { id } }) {
-    // Повторяем запрос, так как у нас нет отдельного запроса на детальную информацию о товаре
-    await store.dispatch('goods/fetchData')
+    if (!store.state.goods.data.length) {
+      await store.dispatch('goods/fetchData')
+    }
     store.commit('detail/setId', id)
     if (!store.getters['detail/info'].id) {
       redirect('/')
+    }
+  },
+
+  data () {
+    return {
+      state: 'read'
     }
   },
 
@@ -61,6 +89,19 @@ export default {
 
     removeFromCart () {
       this.$store.commit('cart/removeItem', this.info.id)
+    },
+
+    setState (state) {
+      this.state = state
+    },
+
+    cancelEdit () {
+      this.state = 'read'
+    },
+
+    confirmEdit (value) {
+      this.$store.commit('goods/editItem', value)
+      this.state = 'read'
     }
   }
 }
@@ -79,11 +120,12 @@ section {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 4px;
+  padding: 12px;
   border: 2px solid $gray;
 
-  .app-button + .app-button {
-    margin-top: 4px;
+  ::v-deep .app-button + .app-button,
+  ::v-deep .app-input + .app-input {
+    margin-top: 8px;
   }
 }
 </style>

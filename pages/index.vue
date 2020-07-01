@@ -20,7 +20,9 @@ export default {
   },
 
   fetch ({ store }) {
-    return store.dispatch('goods/fetchData')
+    if (!store.state.goods.data.length) {
+      return store.dispatch('goods/fetchData')
+    }
   }
 }
 </script>

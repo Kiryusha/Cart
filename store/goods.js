@@ -15,6 +15,15 @@ export const mutations = {
 
   fetchedData (state, payload) {
     state.data = payload
+  },
+
+  editItem (state, payload) {
+    const data = [...state.data]
+    const [item] = data.filter(item => item.id === payload.id)
+    item.name = payload.name
+    item.price = payload.price
+    item.date = payload.date
+    state.data = data
   }
 }
 
