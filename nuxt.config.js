@@ -12,7 +12,7 @@ export default {
   mode: 'universal',
 
   server: {
-    port: process.env.SERVER_PORT,
+    port: process.env.SERVER_PORT
   },
 
   head: {
@@ -31,14 +31,15 @@ export default {
   ** Global CSS
   */
   css: [
-    '@/assets/scss/global.scss',
+    '@/assets/scss/global.scss'
   ],
   /*
   ** Plugins to load before mounting the App
   ** https://nuxtjs.org/guide/plugins
   */
   plugins: [
-    '@/plugins/generalComponents',
+    '@/plugins/axios',
+    '@/plugins/generalComponents'
   ],
   /*
   ** Auto import components
@@ -58,13 +59,21 @@ export default {
   ** Nuxt.js modules
   */
   modules: [
-    '@nuxtjs/axios',
+    ['@nuxtjs/axios',
+    {
+      headers: {
+        get: {
+          // Указываем вручную, потому что у нас идёт мок-запрос
+          'Content-Type': 'application/json'
+        }
+      }
+    }],
     '@nuxtjs/dotenv',
     '@nuxtjs/style-resources',
     ['@nuxtjs/component-cache', {
       max: 10000,
-      maxAge: 1000 * 60 * 60,
-    }],
+      maxAge: 1000 * 60 * 60
+    }]
   ],
   /*
    ** Styles for each component
@@ -75,14 +84,14 @@ export default {
     scss: [
       '@/assets/scss/variables.scss',
       '@/assets/scss/mixins.scss',
-      '@/assets/scss/typography.scss',
+      '@/assets/scss/typography.scss'
     ],
   },
   // шрифты
   webfontloader: {
     google: {
-      families: ['Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600'],
-    },
+      families: ['Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600']
+    }
   },
   /*
   **  Конфигурация Dotenv
@@ -93,7 +102,7 @@ export default {
   ** See https://axios.nuxtjs.org/options
   */
   axios: {
-    baseURL: process.env.baseURL,
+    baseURL: process.env.BASE_URL
     // proxy: true,
   },
   /*
@@ -118,10 +127,10 @@ export default {
           loader: 'eslint-loader',
           exclude: /(node_modules)/,
           options: {
-            formatter: eslintFriendlyFormatter,
-          },
-        });
+            formatter: eslintFriendlyFormatter
+          }
+        })
       }
-    },
+    }
   }
 }

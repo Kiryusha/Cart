@@ -7,7 +7,11 @@
 </template>
 
 <script>
-export default {}
+export default {
+  fetch ({ store }) {
+    return store.dispatch('goods/fetchData')
+  }
+}
 </script>
 
 <style lang="scss" scoped>
