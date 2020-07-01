@@ -84,7 +84,7 @@ export default {
   padding: 4px;
 }
 
-.item + .item {
+.app-item + .app-item {
   margin-top: 4px;
 }
 </style>

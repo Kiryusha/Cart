@@ -1,9 +1,13 @@
 <template>
   <div class="content">
-    <h1 class="title">
-      Список покупок
-    </h1>
-    <List />
+    <section class="title">
+      <h1>
+        Список покупок
+      </h1>
+    </section>
+    <section class="list">
+      <List />
+    </section>
   </div>
 </template>
 

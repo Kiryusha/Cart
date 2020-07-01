@@ -1,6 +1,6 @@
 <template functional>
   <nuxt-link
-    class="item"
+    class="app-item"
     :to="`/goods/${props.id}`"
   >
     <p>
@@ -48,7 +48,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.item {
+.app-item {
   @include a-reset;
   display: block;
   padding: 12px;
