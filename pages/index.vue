@@ -19,11 +19,7 @@ export default {
     List
   },
 
-  fetch ({ store }) {
-    if (!store.state.goods.data.length) {
-      return store.dispatch('goods/fetchData')
-    }
-  }
+  middleware: 'goods'
 }
 </script>
 

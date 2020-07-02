@@ -57,15 +57,7 @@ export default {
     DetailForm
   },
 
-  async fetch ({ store, redirect, params: { id } }) {
-    if (!store.state.goods.data.length) {
-      await store.dispatch('goods/fetchData')
-    }
-    store.commit('detail/setId', id)
-    if (!store.getters['detail/info'].id) {
-      redirect('/')
-    }
-  },
+  middleware: ['goods', 'detail'],
 
   data () {
     return {

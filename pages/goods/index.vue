@@ -1,7 +1,5 @@
 <script>
 export default {
-  fetch ({ redirect }) {
-    redirect('/')
-  }
+  middleware: 'notFound'
 }
 </script>
