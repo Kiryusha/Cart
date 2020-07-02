@@ -5,6 +5,7 @@
 <template functional>
   <button
     class="app-button"
+    :class="props.view"
     :type="props.type"
     v-on="listeners"
   >
@@ -20,6 +21,11 @@ export default {
     type: {
       type: String,
       default: 'button'
+    },
+
+    view: {
+      type: String,
+      default: ''
     }
   }
 }
@@ -30,5 +36,14 @@ export default {
   @include typography-p;
   width: 200px;
   cursor: pointer;
+
+  &.square {
+    width: 30px;
+    height: 30px;
+  }
+
+  & + & {
+    margin-left: 8px;
+  }
 }
 </style>

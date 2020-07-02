@@ -17,6 +17,7 @@
       <AppItem
         v-if="state === 'read'"
         v-bind="info"
+        type="static"
       />
       <DetailForm
         v-else
@@ -120,13 +121,8 @@ section {
 
 .controls {
   display: flex;
-  flex-direction: column;
   align-items: flex-start;
   padding: 12px;
   border: 2px solid $gray;
-
-  ::v-deep .app-button + .app-button {
-    margin-top: 8px;
-  }
 }
 </style>

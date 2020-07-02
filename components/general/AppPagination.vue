@@ -2,6 +2,7 @@
   <div class="app-pagination">
     <AppButton
       v-if="currentPage > 1"
+      view="square"
       @click="$emit('prev')"
     >
       «
@@ -11,6 +12,7 @@
     </div>
     <AppButton
       v-if="(currentPage * pageSize) < total"
+      view="square"
       @click="$emit('next')"
     >
       »
@@ -56,9 +58,5 @@ export default {
 
 .indicator {
   padding: 0 12px;
-}
-
-::v-deep .app-button {
-  width: 30px;
 }
 </style>

@@ -1,8 +1,10 @@
 <!-- Простой функциоанльный переиспользуемый компонент: "Карточка товара" -->
 <template functional>
-  <nuxt-link
+  <component
+    :is="props.type === 'link' ? 'nuxt-link' : 'div'"
     class="app-item"
-    :to="`/goods/${props.id}`"
+    :class="props.type"
+    :to="props.type === 'link' ? `/goods/${props.id}` : false"
   >
     <p>
       Наименование: {{ props.name }}
@@ -13,7 +15,7 @@
     <p>
       Дата покупки: {{ $options.formatDate(props.date) }}
     </p>
-  </nuxt-link>
+  </component>
 </template>
 
 <script>
@@ -39,6 +41,11 @@ export default {
     date: {
       type: Number,
       default: 0
+    },
+
+    type: {
+      type: String,
+      default: 'link'
     }
   },
 
@@ -54,5 +61,14 @@ export default {
   display: block;
   padding: 12px;
   border: 2px solid $gray;
+  transition: background-color .2s;
+
+  &:hover {
+    background-color: rgba($gray, .3);
+  }
+
+  &.static:hover {
+    background-color: transparent;
+  }
 }
 </style>

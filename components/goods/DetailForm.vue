@@ -109,6 +109,10 @@ export default {
   border: 2px solid $gray;
 }
 
+.row {
+  display: flex;
+}
+
 .row + .row {
   margin-top: 12px;
 }
