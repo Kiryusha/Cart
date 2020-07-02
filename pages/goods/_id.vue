@@ -78,6 +78,8 @@ export default {
     },
 
     isInCart () {
+      // Можно было бы использовать Array.prototype.includes(), но я хочу оставить совместимость с
+      // IE без полифила
       return !!~this.$store.state.cart.list.indexOf(this.info.id)
     }
   },

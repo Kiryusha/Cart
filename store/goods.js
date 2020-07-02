@@ -17,6 +17,11 @@ export const mutations = {
     state.data = payload
   },
 
+  isFetchingFailed (state) {
+    state.isFetching = false
+    state.data = []
+  },
+
   editItem (state, payload) {
     const data = [...state.data]
     const [item] = data.filter(item => item.id === payload.id)
@@ -33,6 +38,8 @@ export const actions = {
     try {
       const response = await this.$axios.$get('/mock/goods/data.json')
       commit('fetchedData', response)
+    } catch (e) {
+      commit('isFetchingFailed')
     } finally {
       commit('stopFetchingData')
     }

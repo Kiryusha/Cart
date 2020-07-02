@@ -1,4 +1,4 @@
-// Модуль для работы с корзиной покупателя: добавление, удаление
+// Модуль для работы с корзиной покупателя: добавление, удаление, сортировка и пагинация
 export const state = () => ({
   list: ['1', '2', '3', '4', '5', '6', '7'],
   sorting: 'date',
@@ -39,6 +39,7 @@ export const actions = {
 export const getters = {
   processedList (state, getters, rootState) {
     // Можно было бы использовать Array.prototype.includes(), но я хочу оставить совместимость с IE
+    // без полифила
     const filteredList = rootState.goods.data.filter(item => !!~state.list.indexOf(item.id))
 
     switch (state.sorting) {

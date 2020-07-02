@@ -80,6 +80,8 @@ export default {
       this.sorting = type
     },
 
+    // Так как у нас нет АПИ как такового, реализуем пагинацию фронтовыми средствами: устанавливаем
+    // ограничения рендера элементов и редактируем их через стор
     shouldShowItem (index) {
       return index < (this.pageSize * this.currentPage) &&
         index >= (this.pageSize * (this.currentPage - 1))
