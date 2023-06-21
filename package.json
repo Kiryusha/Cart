@@ -24,7 +24,7 @@
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.11.0",
-    "nuxt": "^2.13.0"
+    "nuxt": "^3.4.3"
   },
   "devDependencies": {
     "@nuxtjs/component-cache": "^1.1.5",
